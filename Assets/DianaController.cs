@@ -9,12 +9,7 @@ public class DianaController : MonoBehaviour {
     private int count = 0;
 	// Use this for initialization
 	void Start () {
-        Random rnd = new Random();
-        float x = Random.Range(0, Screen.width - 20);
-        float y = Random.Range(0, Screen.height - 20);
-        print(this.transform.position.x);
-        print(this.transform.position.y);
-        this.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         timerPrivate = timer;
     }
 
@@ -29,7 +24,6 @@ public class DianaController : MonoBehaviour {
 
             if (hitCollider)
             { // mayor X = 7.88, menor y = 4.91; menor x = 7.97 mayor y = -4.97
-                Random rnd = new Random();
                 float x = Random.Range(-7.5f, 7.5f);
                 float y = Random.Range(-4.6f, 4.6f);
                 transform.position = new Vector3(x, y, transform.position.z);
@@ -48,12 +42,12 @@ public class DianaController : MonoBehaviour {
 
     void DoPost()
     {
-        string url = "http://localhost:21808/api/Rankings";
+        string url = "http://deustomicroservices.azurewebsites.net/api/Rankings";
         WWWForm form = new WWWForm();
         form.AddField("ID", 1);
         form.AddField("Name", "Unity");
         form.AddField("Points", count);
-        form.AddField("Key", "XLUGZKPU8OHU8AUOLDP8");
+        form.AddField("Key", "NH44RCTBDS2DK3QKN8G7");
         WWW www = new WWW(url, form);
         StartCoroutine(WaitForRequest(www));
     }
@@ -63,7 +57,7 @@ public class DianaController : MonoBehaviour {
         // check for errors
         if (www.error == null)
         {
-            Debug.Log("WWW Ok!: " + www.data);
+            Debug.Log("WWW Ok!: " + www.text);
         }
         else
         {
